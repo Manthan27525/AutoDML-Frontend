@@ -82,10 +82,23 @@ if uploaded_file:
                             st.write(result["input_structure"])
 
                         st.subheader("📄 Download Report")
-                        report_url = f"{API_URL}report"
-                        st.markdown(
-                            f"[👉 Click here to download PDF report]({report_url})"
-                        )
+
+                        try:
+                            report_response = requests.get(f"{API_URL}report")
+                        
+                            if report_response.status_code == 200:
+                                st.download_button(
+                                    label="📥 Download PDF Report",
+                                    data=report_response.content,
+                                    file_name="Report.pdf",
+                                    mime="application/pdf",
+                                    use_container_width=True
+                                )
+                            else:
+                                st.warning("⚠️ Report not available yet. Train model first.")
+                        
+                        except Exception as e:
+                            st.error(f"Error fetching report: {e}")
 
                 except Exception as e:
                     st.error(f"⚠️ Error: {e}")
