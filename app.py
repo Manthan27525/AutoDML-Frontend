@@ -3,7 +3,7 @@ import requests
 import pandas as pd
 import json
 
-API_URL = "http://13.61.7.40:8000//"
+API_URL = "http://13.61.7.40:8000/"
 
 st.set_page_config(page_title="AutoDML", layout="wide")
 
