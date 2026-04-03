@@ -13,6 +13,15 @@ st.markdown("Train ML models automatically with zero code")
 uploaded_file = st.file_uploader(
     "📂 Upload Dataset (CSV / Excel)", type=["csv", "xlsx"]
 )
+MAX_SIZE_MB = 5
+
+if uploaded_file:
+    # Check file size
+    file_size = uploaded_file.size / (1024 * 1024)
+
+    if file_size > MAX_SIZE_MB:
+        st.error(f"❌ File too large! Max allowed size is {MAX_SIZE_MB} MB")
+        st.stop()
 
 if uploaded_file:
     try:
